@@ -14,18 +14,36 @@ export default class TodoForm extends React.Component {
 
     };
 
+    onChangeText(text){
+        this.setState({
+            text
+        });
+    }
+
+    onPress(){
+        console.log(this.state.text);
+    }
+
     render(){
 
         return (
             <View style={styles.formContainer}>
 
                 <View style={styles.inputContainer}>
-                    <Input />
+                    <Input 
+                        onChangeText={ (text) => { 
+                            this.onChangeText(text)
+                        } }
+                        value={ this.text }
+                    />
                 </View>
 
                 <View style={styles.buttonContainer}>
                     <Button
                         title="ADD"
+                        onPress={ () => { 
+                            this.onPress();
+                        } }
                     />
                 </View>
 

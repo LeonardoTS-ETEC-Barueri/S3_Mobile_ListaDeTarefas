@@ -3,15 +3,29 @@ import { View, Text, StyleSheet } from 'react-native';
 
 import TodoForm from './components/TodoForm';
 
+// Início da Criação da Store
+    import { createStore } from 'redux';
+    import { Provider } from 'react-redux'; // Componente Wrapper que lidará diretamente com a Store.
+
+    import rootReducer from './reducers';
+
+    const store = createStore(rootReducer);
+
+// Fim da Criação da Store.
+
 class TodoApp extends React.Component {
 
     render(){
 
         return (
-            <View style={styles.container}>
-                {/* <Text>Página Inicial</Text> */}
-                <TodoForm />
-            </View>
+            <Provider store={ store }>
+
+                <View style={styles.container}>
+                    {/* <Text>Página Inicial</Text> */}
+                    <TodoForm />
+                </View>
+                
+            </Provider>
         );
 
     };
