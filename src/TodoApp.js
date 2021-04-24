@@ -1,44 +1,55 @@
-import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import React from 'react'
+import { View, StyleSheet } from 'react-native'
 
-import TodoForm from './components/TodoForm';
+import TodoForm from './components/TodoForm'
+import TodoList from './components/TodoList'
 
-// Início da Criação da Store
-    import { createStore } from 'redux';
-    import { Provider } from 'react-redux'; // Componente Wrapper que lidará diretamente com a Store.
+/* CRIAÇÃO DA STORE */
 
-    import rootReducer from './reducers';
+import { createStore } from 'redux'
+import { Provider } from 'react-redux'
+import rootReducer from './reducers'
 
-    const store = createStore(rootReducer);
+const store = createStore(rootReducer)
 
-// Fim da Criação da Store.
+/* CRIAÇÃO DA STORE */
 
-class TodoApp extends React.Component {
+class TodoApp extends React.Component{
 
     render(){
 
-        return (
-            <Provider store={ store }>
+        return(
+
+
+            <Provider store={store}>
 
                 <View style={styles.container}>
-                    {/* <Text>Página Inicial</Text> */}
+
+                    {/* <Text>PÁGINA INICIAL</Text> */}
                     <TodoForm />
+                    <TodoList />
+
                 </View>
-                
+
             </Provider>
-        );
 
-    };
+        )
 
-};
-
-const styles = StyleSheet.create({
-
-    container: {
-        marginTop: 30,
-        backgroundColor: '#ccc'
     }
 
-});
+}
 
-export default TodoApp;
+const styles = StyleSheet.create(
+
+    {
+
+        container: {
+            marginTop:30,
+            backgroundColor:'#ccc'
+        }
+
+    }
+
+)
+
+export default TodoApp

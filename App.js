@@ -1,1 +1,1 @@
-export default from './src/TodoApp.js';
+export default from './src/TodoApp.js'

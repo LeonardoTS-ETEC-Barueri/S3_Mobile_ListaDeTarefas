@@ -1,69 +1,100 @@
-import React from 'react';
-import { View, Button, StyleSheet } from 'react-native';
+import React from 'react'
+import {View, Button, StyleSheet } from 'react-native'
 
 import Input from './Input';
 
-export default class TodoForm extends React.Component {
+import { connect } from 'react-redux';
+import { addTodo } from '../actions';
+
+class TodoForm extends React.Component{
 
     constructor(props){
-        super(props);
+
+        super(props)
 
         this.state = {
-            text: ''
-        };
 
-    };
+            text:''
+
+        }
+
+    }
 
     onChangeText(text){
+
         this.setState({
+
             text
-        });
+
+        })
+
     }
 
     onPress(){
         console.log(this.state.text);
+        
+        //CHAMADA DA DISPATCH
+        this.props.dispatchAddTodo(this.state.text)
     }
+
 
     render(){
 
-        return (
+        const { text } = this.state;
+
+        return(
+
             <View style={styles.formContainer}>
 
                 <View style={styles.inputContainer}>
-                    <Input 
-                        onChangeText={ (text) => { 
-                            this.onChangeText(text)
-                        } }
-                        value={ this.text }
-                    />
+                    <Input onChangeText={ text => this.onChangeText(text) } value={ text } />
                 </View>
 
-                <View style={styles.buttonContainer}>
-                    <Button
-                        title="ADD"
-                        onPress={ () => { 
-                            this.onPress();
-                        } }
-                    />
+                <View  style={styles.buttomContainer}>
+                    <Button title="ADD" onPress={ () => this.onPress() } />
                 </View>
 
             </View>
-        );
 
-    };
+        )
 
-};
+    }
+
+}
 
 const styles = StyleSheet.create({
 
-    formContainer: {
-        flexDirection: 'row'
+    formContainer:{
+        flexDirection:'row'
     },
-    inputContainer: {
+
+    inputContainer:{
         flex: 4
     },
-    buttonContainer: {
+
+    buttomContainer:{
         flex: 1
     }
 
-});
+})
+
+/* IMPLEMENTAÇÃO DA DISPATCH */
+    //1º FORMA:
+    // const mapDispatchToProps = dispatch => {
+
+    //     return{
+
+    //         dispatchAddTodo: text => dispatch(addTodo(text))
+
+    //     }
+    // }
+
+    //2º FORMA:
+    const mapDispatchToProps = {
+
+        dispatchAddTodo: addTodo
+
+    }
+
+//REALIZA O EXPORT COM A ADIÇÃO DO MÉTODO connect
+export default connect(null, mapDispatchToProps)(TodoForm)

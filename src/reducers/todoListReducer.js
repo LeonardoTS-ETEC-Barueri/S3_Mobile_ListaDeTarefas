@@ -1,21 +1,62 @@
-import { ADD_TODO } from '../actions';
+import { ADD_TODO, TOGGLE_TODO } from '../actions';
 
-const todoListReducer = (state = [], actions) => {
+let newID = 1;
 
-    switch(actions.type){
+const todoListReducer = (state = [], action) => {
+
+    switch(action.type){
+
         case ADD_TODO:
 
+            //TESTANDO A DISPATCH DE ADD TODO:
+            console.log('ADDTODO DISPACHADA COM SUCESSO! - DADOS: ', action.text)
+
             const newTodo = {
-                text: action.text
+
+                id: newID++,
+                text: action.text,
+                done: false
+
             }
 
-            return [...state, newTodo]; // Uso de Spread Operator com Array (É básicamente um Array.push()).
+            // Frontend do tcc
+            // Sql do tcc
+            // Prévia de TCC dia 12-04
+
+            /*
+                state -> [0] = Frontend do tcc
+                newTodo -> [0] = Sql do tcc
+                [...state, newTodo]
+                ----------------------------
+                state -> [0] = Frontend do tcc
+                state -> [1] = Sql do tcc
+            */
+
+            return [...state, newTodo];
+
+        case TOGGLE_TODO:
+
+            action.todoId;
+
+            return state.map( todo => {
+
+                if (todo.id === action.todoId){
+                    return {
+                        ...todo,
+                        done: !todo.done
+                    }
+                }
+
+                return todo
+
+            })
+            
 
         default:
-            return state;   // Se nenhuma action foi despachada, o state volta como está.
+            return state
+
     }
 
-};
+}
 
-export default todoListReducer;
-
+export default todoListReducer

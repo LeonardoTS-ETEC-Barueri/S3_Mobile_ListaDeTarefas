@@ -1,8 +1,23 @@
-export const ADD_TODO = 'ADD_TODO'  // Tipo da action.
+//ACTION CREATE ADIÇÃO DE TAREFAS
+export const ADD_TODO = 'ADD_TODO';
 
-export const addTodo = (text) => ({ // Action que se comunicará com a Reducer.
+//ACTION CREATE ADIÇÃO DE TAREFAS
+export const addTodo = text => ({
 
     type: ADD_TODO,
     text
 
 });
+
+// ------------------------------
+
+// ACTION CREATE CHECK DE TAREFAS.
+export const TOGGLE_TODO = 'TOGGLE_TODO';
+
+export const toggleTodo = todoId => ({
+
+    type: TOGGLE_TODO,
+    todoId
+    
+});
+
